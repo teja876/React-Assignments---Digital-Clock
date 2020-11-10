@@ -11,7 +11,7 @@ class App extends Component {
       day: ""
     };
 
-    this.timerID = setInterval(this.foo.bind(this), 1000);
+    this.timerID = setInterval(this.foo.bind(this), 500);
   }
   foo() {
     // console.log("hello");
@@ -37,7 +37,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="clock">
+      <div className="Clock">
         <h3 id="time">{`${this.state.h}:${this.state.m}:${this.state.s} ${this.state.day}`}</h3>
       </div>
     );
