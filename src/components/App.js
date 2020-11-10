@@ -2,44 +2,26 @@ import React, { Component, useState } from "react";
 import "../styles/App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      h: "",
-      m: "",
-      s: "",
-      day: ""
-    };
-
-    this.timerID = setInterval(this.foo.bind(this), 500);
+  constructor() {
+    super();
+    this.state = { time: new Date() };
   }
-  foo() {
-    // console.log("hello");
-    let check = function (i) {
-      // console.log(i);
-      if (i < 10) return "0" + i;
-      else return `${i}`;
-    };
-    let date = new Date();
-    let hour = date.getHours();
-    let min = date.getMinutes();
-    let sec = date.getSeconds();
-    let d = hour < 12 ? "AM" : "PM";
-    this.setState({
-      h: check(hour),
-      m: check(min),
-      s: check(sec),
-      day: d
-    });
+  currentTime() {
+    this.setState({ time: new Date() });
+  }
+  componentDidMount() {
+    this.interval = setInterval(() => this.currentTime(), 1000);
   }
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    clearInterval(this.interval);
   }
   render() {
     return (
-      <div className="Clock">
-        <h3 id="time">{`${this.state.h}:${this.state.m}:${this.state.s} ${this.state.day}`}</h3>
-      </div>
+      <>
+        <div className="Clock">
+          <h3 id="time">{this.state.time.toLocaleTimeString()}</h3>
+        </div>
+      </>
     );
   }
 }
